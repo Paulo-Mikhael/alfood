@@ -42,9 +42,10 @@ const ListaRestaurantes = () => {
   const pesquisaRestaurante = (pesquisa: string) => {
     setFiltrando(true);
 
-    const filter = restaurantes.filter(restaurante => restaurante.nome.includes(pesquisa));
+    const filter = restaurantes.filter(restaurante => restaurante.nome.toLowerCase().includes(pesquisa.toLowerCase()));
 
     setRestaurantesAmostra(filter);
+    console.log(pesquisa);
   }
 
   return (<section className={style.ListaRestaurantes}>
