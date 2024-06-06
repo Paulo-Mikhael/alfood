@@ -16,23 +16,6 @@ const PaginaBaseAdmin = () => {
         .catch(err => console.log(err));
     }
   }, [parametros]);
-  const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
-    evento.preventDefault();
-
-    if (parametros.id) {
-      http.put(`restaurantes/${parametros.id}/`, {
-        nome: nomeRestaurante
-      })
-        .then(() => alert(`${nomeRestaurante} atualizado com sucesso`))
-        .catch(error => console.log(error));
-    } else {
-      http.post('restaurantes/', {
-        nome: nomeRestaurante
-      })
-        .then(() => alert(`${nomeRestaurante} cadastrado com sucesso`))
-        .catch(error => console.log(error));
-    }
-  }
 
   return (
     <>
@@ -51,6 +34,11 @@ const PaginaBaseAdmin = () => {
               <Link component={RouterLink} to='/admin/restaurantes/novo/'>
                 <Button sx={{ my: 2, color: 'white' }}>
                   Novo Restaurante
+                </Button>
+              </Link>
+              <Link component={RouterLink} to='/admin/pratos/'>
+                <Button sx={{ my: 2, color: 'white' }}>
+                  Pratos
                 </Button>
               </Link>
             </Box>
