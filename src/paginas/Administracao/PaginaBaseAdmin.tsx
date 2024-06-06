@@ -1,11 +1,11 @@
 import { AppBar, Box, Button, TextField, Typography, Container, Link, Toolbar, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import IRestaurante from "../../../interfaces/IRestaurante";
-import http from "../../../http";
+import { Outlet, useParams } from "react-router-dom";
 import { Link as RouterLink } from 'react-router-dom';
+import http from "../../http";
+import IRestaurante from "../../interfaces/IRestaurante";
 
-const FormularioRestaurante = () => {
+const PaginaBaseAdmin = () => {
   const [nomeRestaurante, setNomeRestaurante] = useState('');
 
   const parametros = useParams();
@@ -35,30 +35,37 @@ const FormularioRestaurante = () => {
   }
 
   return (
-    <Box>
-      <Container maxWidth="lg" sx={{ marginTop: 1 }}>
-        <Paper sx={{ p: 2 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1 }}>
-            <Typography component="h1" variant="h6">
-              Fomulário de Restaurantes
+    <>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar>
+            <Typography variant="h6">
+              Administração
             </Typography>
-            <Box component="form" sx={{ width: '100%' }} onSubmit={(evento: React.FormEvent<HTMLFormElement>) => { aoSubmeterForm(evento) }}>
-              <TextField
-                onChange={evento => setNomeRestaurante(evento.target.value)}
-                value={nomeRestaurante}
-                id="standard-basic"
-                label="Nome do Restaurante"
-                variant="standard"
-                fullWidth
-                required
-              />
-              <Button type="submit" variant="outlined" fullWidth sx={{ marginTop: 1 }}>Salvar</Button>
+            <Box sx={{ display: 'flex', flexGrow: 1 }}>
+              <Link component={RouterLink} to='/admin/restaurantes/'>
+                <Button sx={{ my: 2, color: 'white' }}>
+                  Restaurantes
+                </Button>
+              </Link>
+              <Link component={RouterLink} to='/admin/restaurantes/novo/'>
+                <Button sx={{ my: 2, color: 'white' }}>
+                  Novo Restaurante
+                </Button>
+              </Link>
             </Box>
-          </Box>
-        </Paper>
-      </Container>
-    </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Box>
+        <Container maxWidth="lg" sx={{ marginTop: 1 }}>
+          <Paper sx={{ p: 2 }}>
+            <Outlet />
+          </Paper>
+        </Container>
+      </Box>
+    </>
   );
 }
 
-export default FormularioRestaurante;
+export default PaginaBaseAdmin;
