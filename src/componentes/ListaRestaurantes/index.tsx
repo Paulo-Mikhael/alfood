@@ -4,6 +4,7 @@ import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
 import axios from 'axios';
 import { Button, TextField } from '@mui/material';
+import { IPaginacao } from '../../interfaces/IPaginacao';
 
 const ListaRestaurantes = () => {
 
